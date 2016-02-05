@@ -44,7 +44,7 @@ sub _set_entry_prefs {
 
 sub _hide_entry_prefs {
     my ( $cb, $app, $param, $tmpl ) = @_;
-    if (! __admin() ) {
+    if ( __admin() ) {
         return 1;
     }
     my $nodes = $tmpl->getElementsByName( 'display_options' );
@@ -60,14 +60,12 @@ sub __admin {
             my $class = $app->blog->class;
             my $permission = 'can_administer_' . $class;
             $perm = $app->user->permissions( $app->blog->id )->$permission;
-        } else {
-            return 1;
         }
     }
     if (! $perm ) {
-        return 1;
+        return undef;
     }
-    return undef;
+    return 1;
 }
 
 1;
