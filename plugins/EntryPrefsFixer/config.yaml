@@ -1,0 +1,10 @@
+id: EntryPrefsFixer
+name: EntryPrefsFixer
+key: entryprefsfixer
+version: 0.1
+author_link: http://junnama.alfasado.net/online/
+author_name: Junnama Noda
+description: When the entry prefs is preserved, the setting is applied to all users.
+callbacks:
+    MT::Permission::post_save: $entryprefsfixer::EntryPrefsFixer::Callbacks::_set_entry_prefs
+    MT::App::CMS::template_param.edit_entry: $entryprefsfixer::EntryPrefsFixer::Callbacks::_hide_entry_prefs
